@@ -3,192 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Videos Layout with Sparkles</title>
-
-    <!-- Open Graph Metadata -->
-    <meta property="og:title" content="Three Videos Layout with Sparkles">
-    <meta property="og:description" content="A cool webpage with videos, sparkles, and hover animations. Made by Robio <3">
-    <meta property="og:image" content="https://yourwebsite.com/your-thumbnail.png">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta property="og:type" content="website">
-
-    <!-- Discord Embed Colors (optional for richer embeds) -->
-    <meta name="theme-color" content="#000000"> <!-- Black background -->
-
-    <style>
-        /* General styles */
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: black;
-            color: white;
-            overflow: hidden;
-        }
-
-        /* Navbar styles */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #1a1a1a;
-            color: white;
-            font-family: Arial, sans-serif;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .navbar .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #d3b0ff;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: white;
-            font-size: 16px;
-            transition: color 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #d3b0ff;
-        }
-
-        .nav-links .signup {
-            background-color: #9c4cff;
-            padding: 5px 15px;
-            border-radius: 5px;
-            color: white;
-            font-weight: bold;
-        }
-
-        .nav-links .signup:hover {
-            background-color: #7a3bcb;
-        }
-
-        /* Video container styles */
-        .video-container {
-            display: flex;
-            justify-content: space-between;
-            width: 80%;
-            margin: 100px auto 0; /* Push down to avoid navbar overlap */
-        }
-
-        video {
-            width: 30%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        video:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Sparkle styles */
-        .sparkle {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: radial-gradient(circle, white, rgba(255, 255, 255, 0.5));
-            border-radius: 50%;
-            pointer-events: none;
-            animation: sparkle 1s ease-out forwards;
-        }
-
-        @keyframes sparkle {
-            0% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(2);
-            }
-        }
-
-        /* Watermark styles */
-        .watermark {
-            position: absolute;
-            bottom: 10px;
-            width: 100%;
-            text-align: center;
-            color: white;
-            font-size: 14px;
-            opacity: 0.6;
-        }
-
-        .watermark a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .watermark a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <title>Video Layout with Glow Effect</title>
+    <link rel="stylesheet" href="final_glow_styles.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <div class="logo">guns.lol</div>
-        <div class="nav-links">
-            <a href="#partnership">Hone.gg Partnership</a>
-            <a href="#discord">Discord</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#login">Login</a>
-            <a href="#signup" class="signup">Sign Up Free</a>
+    <header>
+        <div class="logo">
+            <span class="white-text">Doxing</span><span class="red-dot">.</span><span class="white-text">Fun</span>
         </div>
-    </div>
-
-    <!-- Video container -->
-    <div class="video-container">
-        <!-- Left Video -->
-        <video controls>
-            <source src="video/video1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <!-- Middle Video -->
-        <video controls>
-            <source src="video/video2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <!-- Right Video -->
-        <video controls>
-            <source src="video/video3.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-    </div>
-
-    <!-- Watermark -->
-    <div class="watermark">
-        Made by <b>Robio <3</b> | <a href="https://doxbin.fun" target="_blank">Doxbin.fun 2024</a>
-    </div>
-
-    <script>
-        // Function to create sparkles at the cursor position
-        document.addEventListener('mousemove', (event) => {
-            const sparkle = document.createElement('div');
-            sparkle.classList.add('sparkle');
-            document.body.appendChild(sparkle);
-
-            // Set sparkle position
-            sparkle.style.left = `${event.pageX}px`;
-            sparkle.style.top = `${event.pageY}px`;
-
-            // Remove sparkle after animation ends
-            sparkle.addEventListener('animationend', () => {
-                sparkle.remove();
-            });
-        });
-    </script>
+        <nav>
+            <a href="https://t.me/hebleeds" target="_blank">Telegram</a>
+            <a href="https://discord.com/users/225424344912756738" target="_blank">Discord</a>
+            <a href="admin_page.html" class="button" target="_blank">Admins</a>
+        </nav>
+    </header>
+    <main>
+        <div class="video-container">
+            <video controls>
+                <source src="video/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video controls>
+                <source src="video/video2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video controls>
+                <source src="video/video3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </main>
+    <footer>
+        <p>All Rights Reserved © Doxing.fun 2024</p>
+    </footer>
 </body>
 </html>
