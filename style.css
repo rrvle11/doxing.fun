@@ -88,7 +88,10 @@ main {
 
 .video-container {
     display: flex;
+    justify-content: center; /* Center the videos horizontally */
+    align-items: center; /* Center the videos vertically */
     gap: 30px; /* Add space between videos */
+    width: 100%; /* Ensure it spans the full width of the screen */
 }
 
 .video-container video {
