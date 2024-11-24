@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Videos Layout with Sparkles</title>
+    <title>Three Videos Layout with Sparkles and Rain</title>
 
     <!-- Open Graph Metadata -->
-    <meta property="og:title" content="Doxing.fun">
-    <meta property="og:description" content="Wa7ed Website khatiir w naaadi">
-    <meta property="og:image" content="https://imgur.com/a/8eimc3K">
-    <meta property="og:url" content="doxing.fun">
+    <meta property="og:title" content="Three Videos Layout with Sparkles and Rain">
+    <meta property="og:description" content="A cool webpage with videos, sparkles, and interactive rain effects. Made by Robio <3">
+    <meta property="og:image" content="https://yourwebsite.com/your-thumbnail.png">
+    <meta property="og:url" content="https://yourwebsite.com">
     <meta property="og:type" content="website">
 
-    <!-- Discord Embed Colors (optional for richer embeds) -->
-    <meta name="theme-color" content="#ff0000"> <!-- Black background -->
-
+    <!-- Styles -->
     <style>
         body {
             display: flex;
@@ -26,29 +24,41 @@
             background-color: black; /* Black background */
             overflow: hidden; /* Prevent scrollbars from showing */
             cursor: none; /* Hide the default cursor */
+            position: relative;
         }
+
         .video-container {
             display: flex;
             justify-content: space-between;
             width: 80%;
+            position: relative;
+            z-index: 2; /* Ensure videos are above rain */
         }
+
         video {
             width: 30%;
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation for hover */
         }
+
         video:hover {
             transform: translateY(-10px) scale(1.05); /* Pop up and slightly enlarge */
             box-shadow: 0 10px 20px rgba(255, 255, 255, 0.5); /* Add a shadow for more emphasis */
         }
-        .sparkle {
+
+        .sparkle, .raindrop {
             position: absolute;
+            pointer-events: none; /* Ignore pointer events */
+            border-radius: 50%;
+        }
+
+        /* Sparkle Effect */
+        .sparkle {
             width: 8px;
             height: 8px;
             background: radial-gradient(circle, white, rgba(255, 255, 255, 0.5));
-            border-radius: 50%;
-            pointer-events: none; /* Ignore pointer events */
             animation: sparkle 1s ease-out forwards;
         }
+
         @keyframes sparkle {
             0% {
                 opacity: 1;
@@ -59,6 +69,27 @@
                 transform: scale(2);
             }
         }
+
+        /* Raindrop Effect */
+        .raindrop {
+            width: 3px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.7);
+            animation: fall 1.5s linear forwards;
+            z-index: 1; /* Behind videos */
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-20px);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(300px);
+                opacity: 0;
+            }
+        }
+
         .watermark {
             position: absolute;
             bottom: 10px;
@@ -69,10 +100,12 @@
             font-family: Arial, sans-serif;
             opacity: 0.6;
         }
+
         .watermark a {
             color: white;
             text-decoration: none;
         }
+
         .watermark a:hover {
             text-decoration: underline;
         }
@@ -103,7 +136,7 @@
     </div>
 
     <script>
-        // Function to create sparkles at the cursor position
+        // Sparkle Effect
         document.addEventListener('mousemove', (event) => {
             const sparkle = document.createElement('div');
             sparkle.classList.add('sparkle');
@@ -117,6 +150,23 @@
             sparkle.addEventListener('animationend', () => {
                 sparkle.remove();
             });
+        });
+
+        // Rain Effect
+        document.addEventListener('mousemove', (event) => {
+            const rainContainer = document.createElement('div');
+            for (let i = 0; i < 5; i++) {
+                const raindrop = document.createElement('div');
+                raindrop.classList.add('raindrop');
+                raindrop.style.left = `${event.pageX + Math.random() * 50 - 25}px`;
+                raindrop.style.top = `${event.pageY - 20}px`;
+                document.body.appendChild(raindrop);
+
+                // Remove raindrop after animation ends
+                raindrop.addEventListener('animationend', () => {
+                    raindrop.remove();
+                });
+            }
         });
     </script>
 </body>
