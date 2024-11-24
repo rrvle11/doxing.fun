@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robio Owns You | Get Doxed</title>
+    <title>Three Videos Layout with Sparkles</title>
     <style>
         body {
             display: flex;
@@ -15,34 +15,6 @@
             background-color: black; /* Black background */
             overflow: hidden; /* Prevent scrollbars from showing */
             cursor: none; /* Hide the default cursor */
-            color: white;
-            font-family: Arial, sans-serif;
-        }
-        h1 {
-            font-size: 24px;
-            color: white;
-            text-align: center;
-            margin-bottom: 20px;
-            overflow: hidden; /* Ensures the text starts hidden */
-            white-space: nowrap; /* Prevents wrapping */
-            border-right: 2px solid white; /* Cursor effect */
-            animation: typing 3s steps(30, end), blink-caret 0.5s step-end infinite;
-        }
-        @keyframes typing {
-            from {
-                width: 0;
-            }
-            to {
-                width: 100%;
-            }
-        }
-        @keyframes blink-caret {
-            from, to {
-                border-color: transparent;
-            }
-            50% {
-                border-color: white;
-            }
         }
         .video-container {
             display: flex;
@@ -51,8 +23,6 @@
         }
         video {
             width: 30%;
-            border-radius: 8px;
-            box-shadow: 0 0 15px 5px silver; /* Default glow */
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation for hover */
         }
         video:hover {
@@ -85,6 +55,7 @@
             text-align: center;
             color: white;
             font-size: 14px;
+            font-family: Arial, sans-serif;
             opacity: 0.6;
         }
         .watermark a {
@@ -97,10 +68,6 @@
     </style>
 </head>
 <body>
-    <!-- Animated Title -->
-    <h1>Robio Owns You | Get Doxed</h1>
-
-    <!-- Videos -->
     <div class="video-container">
         <!-- Left Video -->
         <video controls>
