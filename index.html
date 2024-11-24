@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Three Videos Layout</title>
+    <title>Three Videos Layout with Sparkles</title>
     <style>
         body {
             display: flex;
@@ -12,6 +12,8 @@
             height: 100vh;
             margin: 0;
             background-color: black; /* Black background */
+            overflow: hidden; /* Prevent scrollbars from showing */
+            cursor: none; /* Hide the default cursor */
         }
         .video-container {
             display: flex;
@@ -20,6 +22,25 @@
         }
         video {
             width: 30%;
+        }
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, white, rgba(255, 255, 255, 0.5));
+            border-radius: 50%;
+            pointer-events: none; /* Ignore pointer events */
+            animation: sparkle 1s ease-out forwards;
+        }
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(2);
+            }
         }
     </style>
 </head>
@@ -41,5 +62,23 @@
             Your browser does not support the video tag.
         </video>
     </div>
+
+    <script>
+        // Function to create sparkles at the cursor position
+        document.addEventListener('mousemove', (event) => {
+            const sparkle = document.createElement('div');
+            sparkle.classList.add('sparkle');
+            document.body.appendChild(sparkle);
+
+            // Set sparkle position
+            sparkle.style.left = `${event.pageX}px`;
+            sparkle.style.top = `${event.pageY}px`;
+
+            // Remove sparkle after animation ends
+            sparkle.addEventListener('animationend', () => {
+                sparkle.remove();
+            });
+        });
+    </script>
 </body>
 </html>
