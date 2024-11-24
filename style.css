@@ -92,7 +92,7 @@ main {
 }
 
 .video-container video {
-    width: 30%;
+    width: 25%; /* Reduced the width of the videos */
     border-radius: 15px; /* Round the videos */
     box-shadow: 0 4px 10px rgba(255, 69, 0, 0.4);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
