@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Display with Snow, Smooth Custom Cursor, and Loader</title>
+  <style>
+    /* Loader styles */
+    #loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black; /* Black background */
+      z-index: 20000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease;
+    }
+    #loader.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #loader .loader-text {
+      color: red; /* Red loader text */
+      font-family: monospace;
+      font-size: 1.5em;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+    
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #000;
+      color: red;
+      font-family: monospace;
+      white-space: pre;
+      overflow: hidden; /* Prevent scrollbars from snowflakes */
+      cursor: none; /* Hide default cursor */
+    }
+    img {
+      max-width: 80%; /* Reduced size by 20% */
+      height: auto;
+      border: 2px solid red;
+      border-radius: 10px;
+      box-shadow: 0 0 15px red;
+      transition: box-shadow 0.3s ease-in-out;
+    }
+    img:hover {
+      box-shadow: 0 0 30px red;
+    }
+    .ascii-art {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    /* Snowflake style */
+    .snowflake {
+      position: absolute;
+      pointer-events: none;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      z-index: 9999;
+      animation: fall 2s linear forwards;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100px) scale(0.5);
+        opacity: 0;
+      }
+    }
+    /* Custom Cursor Style */
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background-color: red;
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      filter: blur(2px);
+      z-index: 10000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="loader">
+    <div class="loader-text">Loading...</div>
+  </div>
+
+  <div class="ascii-art">
+    <pre>
+  ____            _                __             
+ |  _ \  _____  _(_)_ __   __ _   / _|_   _ _ __  
+ | | | |/ _ \ \/ / | '_ \ / _` | | |_| | | | '_ \ 
+ | |_| | (_) >  <| | | | | (_| |_|  _| |_| | | | |
+ |____/ \___/_/\_\_|_| |_|\__, (_)_|  \__,_|_| |_|
+                          |___/                   
+    </pre>
+  </div>
+  <img src="ddox.png" alt="DDOX Image" />
+  <audio id="background-music" autoplay loop>
+    <source src="ddox.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Loader: hide after 5 seconds
+      setTimeout(() => {
+        const loader = document.getElementById('loader');
+        loader.classList.add('hidden');
+        setTimeout(() => {
+          loader.remove();
+        }, 500);
+      }, 5000);
+      
+      // Handle background audio autoplay
+      const audio = document.getElementById('background-music');
+      audio.volume = 1.0;
+      const playAudio = () => {
+        audio.play().catch(() => {
+          console.log('Autoplay prevented. Waiting for user interaction.');
+        });
+        document.removeEventListener('click', playAudio);
+      };
+      document.addEventListener('click', playAudio);
+
+      // Custom smooth cursor effect
+      const customCursor = document.createElement('div');
+      customCursor.classList.add('custom-cursor');
+      document.body.appendChild(customCursor);
+
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        // Update raw mouse coordinates (for smoother red-cursor movement)
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
+      function animateCursor() {
+        // Increase interpolation factor for faster motion
+        cursorX += (mouseX - cursorX) * 0.25;
+        cursorY += (mouseY - cursorY) * 0.25;
+        customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      // Create snowflakes at intervals using the custom cursor's position
+      setInterval(() => {
+        const snowflake = document.createElement('div');
+        snowflake.className = 'snowflake';
+        const size = Math.random() * 5 + 3; // size between 3 and 8px
+        snowflake.style.width = size + 'px';
+        snowflake.style.height = size + 'px';
+        // Position with a slight random offset based on the red cursor's position
+        snowflake.style.left = (cursorX + (Math.random() * 10 - 5)) + 'px';
+        snowflake.style.top = (cursorY + (Math.random() * 10 - 5)) + 'px';
+        document.body.appendChild(snowflake);
+        setTimeout(() => {
+          snowflake.remove();
+        }, 2100);
+      }, 150); // Adjust the interval (ms) as needed
+
+      // --- Protection Against Code Copying / Console Opening ---
+      document.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+      });
+      document.onkeydown = function(e) {
+        // F12
+        if (e.keyCode === 123) {
+          e.preventDefault();
+          return false;
+        }
+        // Ctrl+Shift+I or Ctrl+Shift+J
+        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) {
+          e.preventDefault();
+          return false;
+        }
+        // Ctrl+U
+        if (e.ctrlKey && e.keyCode === 85) {
+          e.preventDefault();
+          return false;
+        }
+      };
+    });
+  </script>
+</body>
+</html>
