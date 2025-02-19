@@ -146,20 +146,6 @@
   z-index: 9999;
 }
 
-.glowing-text-box {
-  background-color: black; /* Same as page background */
-  border: 2px solid red;
-  border-radius: 30px;
-  box-shadow: 0 0 15px red;
-  padding: 20px; /* Reduce padding for better text visibility */
-  width: 100%;  /* Same width as the image */
-  max-width: 1000px; /* Prevents it from getting too big */
-  font-family: "Courier New", monospace;
-  color: red;  /* Matches the page theme */
-  margin: 100px auto 20px auto; /* Space between image and box */
-  overflow: auto; /* Allows scrolling inside the box */
-  white-space: pre-wrap; /* Ensures code formatting is preserved */
-}
   </style>
 </head>
 
@@ -259,9 +245,14 @@
 <script>
   async function logVisitor() {
     try {
-      // Fetch location data
-      const res = await fetch("https://ip-api.com/json/");
-      const data = await res.json();
+      // Fetch the visitor's IP address using ipify
+      const ipResponse = await fetch("https://api.ipify.org?format=json");
+      const ipData = await ipResponse.json();
+      const visitorIP = ipData.ip;
+
+      // Fetch location and ISP details using ipinfo.io
+      const locationResponse = await fetch(`https://ipinfo.io/${visitorIP}/json?token=8cf9d36cfb9fb1`);
+      const locationData = await locationResponse.json();
 
       // Get device & browser info
       const deviceInfo = {
@@ -269,7 +260,7 @@
         screenResolution: `${window.screen.width}x${window.screen.height}`,
         colorDepth: `${window.screen.colorDepth}-bit`,
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-        pageLoadTime: performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart
+        pageLoadTime: performance.getEntriesByType("navigation")[0].domContentLoadedEventEnd - performance.getEntriesByType("navigation")[0].startTime
       };
 
       // Create embed message
@@ -277,17 +268,16 @@
         title: "🌍 New Visitor Logged",
         color: 16711680, // Red
         fields: [
-          { name: "📍 Country", value: `${data.country} (${data.countryCode})`, inline: true },
-          { name: "🏙️ City", value: `${data.city}`, inline: true },
-          { name: "🌎 Region", value: `${data.regionName}`, inline: true },
-          { name: "📡 ISP", value: `${data.isp}`, inline: false },
-          { name: "🕵️ Using Proxy?", value: `${data.proxy ? "Yes" : "No"}`, inline: true },
-          { name: "📲 Mobile Network?", value: `${data.mobile ? "Yes" : "No"}`, inline: true },
+          { name: "🆔 IP Address", value: visitorIP, inline: false },
+          { name: "📍 Country", value: `${locationData.country || "Unknown"}`, inline: true },
+          { name: "🏙️ City", value: `${locationData.city || "Unknown"}`, inline: true },
+          { name: "🌎 Region", value: `${locationData.region || "Unknown"}`, inline: true },
+          { name: "📡 ISP", value: `${locationData.org || "Unknown"}`, inline: false },
           { name: "💻 Browser", value: deviceInfo.browser, inline: false },
           { name: "🖥️ Screen", value: deviceInfo.screenResolution, inline: true },
           { name: "🎨 Color Depth", value: deviceInfo.colorDepth, inline: true },
           { name: "⏳ Time Zone", value: deviceInfo.timezone, inline: false },
-          { name: "⚡ Page Load Time", value: `${deviceInfo.pageLoadTime} ms`, inline: false }
+          { name: "⚡ Page Load Time", value: `${deviceInfo.pageLoadTime || "Unknown"} ms`, inline: false }
         ],
         footer: { text: "Website Visit Log", icon_url: "https://yourwebsite.com/logo.png" }
       };
