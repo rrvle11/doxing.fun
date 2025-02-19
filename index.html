@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+  <!-- Prism.js for syntax highlighting -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Open Graph (OG) Meta Tags for Discord and Social Media Embeds -->
   <meta property="og:title" content="Doxing.fun | robio own u :3" />
-  <meta property="og:description" content="part 1 of daiho Dox" />
-  <meta property="og:image" content="https://doxing.fun/ddox.png" /> <!-- Replace with your image URL -->
-  <meta property="og:url" content="https://yourwebsite.com" /> <!-- Replace with your website URL -->
-  <meta name="twitter:card" content="ddox.png" />
+  <meta property="og:description" content="A fun interactive website with smooth cursor effects, snowflakes, and music!" />
+  <meta property="og:image" content="https://yourdomain.com/ddox.png" />
+  <meta property="og:url" content="https://yourwebsite.com" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Doxing.fun | robio own u :3" />
-  <meta name="twitter:description" content="part 1 of daiho Dox" />
-  <meta name="twitter:image" content="https://doxing.fun/ddox.png" /> <!-- Replace with your image URL -->
-  <meta name="twitter:url" content="https://doxing.fun/" /> <!-- Replace with your website URL -->
-
+  <meta name="twitter:description" content="A fun interactive website with smooth cursor effects, snowflakes, and music!" />
+  <meta name="twitter:image" content="https://yourdomain.com/ddox.png" />
+  <meta name="twitter:url" content="https://yourwebsite.com" />
   <title>Doxing.fun | robio own u :3</title>
   <style>
     /* Loader styles */
@@ -23,53 +27,61 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: black; /* Black background */
+      background: black;
       z-index: 20000;
       display: flex;
       justify-content: center;
       align-items: center;
       transition: opacity 0.5s ease;
     }
+
+    /* Add this scrollbar code below */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: red;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: darkred;
+  }
+
     #loader.hidden {
       opacity: 0;
       pointer-events: none;
     }
     #loader .loader-text {
-      color: red; /* Red loader text */
+      color: red;
       font-family: monospace;
       font-size: 1.5em;
       animation: pulse 1.5s infinite ease-in-out;
     }
     @keyframes pulse {
-      0% {
-        transform: scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 0.8;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
     }
-    
+
     body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #000;
-      color: red;
-      font-family: monospace;
-      white-space: pre;
-      overflow: hidden; /* Prevent scrollbars from snowflakes */
-      cursor: none; /* Hide default cursor */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 150vh; /* Allows scrolling */
+  background-color: #000;
+  color: red;
+  font-family: monospace;
+  white-space: pre;
+  cursor: none; /* Hide default cursor */
     }
     img {
-      max-width: 80%; /* Reduced size by 20% */
+      max-width: 80%;
       height: auto;
       border: 2px solid red;
       border-radius: 10px;
@@ -79,10 +91,31 @@
     img:hover {
       box-shadow: 0 0 30px red;
     }
+    
     .ascii-art {
+      position: relative;
       text-align: center;
       margin-bottom: 20px;
+      font-size: 1.1em;
     }
+
+    /* Gold sparkles */
+    .sparkle {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: gold;
+      border-radius: 50%;
+      opacity: 0;
+      box-shadow: 0 0 8px gold;
+      animation: sparkle 1.5s infinite;
+    }
+    @keyframes sparkle {
+      0% { opacity: 0; transform: scale(0.5); }
+      50% { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+
     /* Snowflake style */
     .snowflake {
       position: absolute;
@@ -94,38 +127,49 @@
       animation: fall 2s linear forwards;
     }
     @keyframes fall {
-      0% {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(100px) scale(0.5);
-        opacity: 0;
-      }
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(100px) scale(0.5); opacity: 0; }
     }
-    /* Custom Cursor Style */
+
+    /* Custom Cursor */
     .custom-cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 20px;
-      height: 20px;
-      background-color: red;
-      border-radius: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%);
-      filter: blur(2px);
-      z-index: 10000;
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15px;  /* Make it smaller if needed */
+  height: 15px;
+  background-color: red;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;  /* Ensures visibility on dark backgrounds */
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.glowing-text-box {
+  background-color: black; /* Same as page background */
+  border: 2px solid red;
+  border-radius: 30px;
+  box-shadow: 0 0 15px red;
+  padding: 20px; /* Reduce padding for better text visibility */
+  width: 100%;  /* Same width as the image */
+  max-width: 1000px; /* Prevents it from getting too big */
+  font-family: "Courier New", monospace;
+  color: red;  /* Matches the page theme */
+  margin: 100px auto 20px auto; /* Space between image and box */
+  overflow: auto; /* Allows scrolling inside the box */
+  white-space: pre-wrap; /* Ensures code formatting is preserved */
+}
   </style>
 </head>
+
 <body>
   <!-- Loader -->
   <div id="loader">
     <div class="loader-text">Loading...</div>
   </div>
 
-  <div class="ascii-art">
+  <div class="ascii-art" id="ascii-container">
     <pre>
   ____            _                __             
  |  _ \  _____  _(_)_ __   __ _   / _|_   _ _ __  
@@ -135,95 +179,134 @@
                           |___/                    
     </pre>
   </div>
+
   <img src="ddox.png" alt="DDOX Image" />
+
+  <div class="glowing-text-box">
+    <p>This is a sample text inside the glowing box. Edit this text in the HTML!</p>
+  </div>
+
   <audio id="background-music" autoplay loop>
     <source src="ddox.mp3" type="audio/mpeg" />
     Your browser does not support the audio element.
   </audio>
-  
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       // Loader: hide after 5 seconds
       setTimeout(() => {
-        const loader = document.getElementById('loader');
-        loader.classList.add('hidden');
-        setTimeout(() => {
-          loader.remove();
-        }, 500);
+        document.getElementById('loader').classList.add('hidden');
       }, 5000);
-      
-      // Handle background audio autoplay
+  
+      // Background Music
       const audio = document.getElementById('background-music');
-      audio.volume = 1.0;
       const playAudio = () => {
-        audio.play().catch(() => {
-          console.log('Autoplay prevented. Waiting for user interaction.');
-        });
+        audio.play().catch(() => console.log('Autoplay prevented. Waiting for user interaction.'));
         document.removeEventListener('click', playAudio);
       };
       document.addEventListener('click', playAudio);
-
-      // Custom smooth cursor effect
+  
+      // Custom Smooth Cursor
       const customCursor = document.createElement('div');
       customCursor.classList.add('custom-cursor');
       document.body.appendChild(customCursor);
-
+  
       let mouseX = 0, mouseY = 0;
       let cursorX = 0, cursorY = 0;
-
-      document.addEventListener('mousemove', (e) => {
-        // Update raw mouse coordinates (for smoother red-cursor movement)
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-
+  
+     document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+  
       function animateCursor() {
-        // Increase interpolation factor for faster motion
-        cursorX += (mouseX - cursorX) * 0.25;
-        cursorY += (mouseY - cursorY) * 0.25;
+        cursorX += (mouseX - cursorX) * 0.2;
+        cursorY += (mouseY - cursorY) * 0.2;
         customCursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
         requestAnimationFrame(animateCursor);
       }
       animateCursor();
-
-      // Create snowflakes at intervals using the custom cursor's position
+  
+      // Snowflakes following cursor
       setInterval(() => {
         const snowflake = document.createElement('div');
         snowflake.className = 'snowflake';
-        const size = Math.random() * 5 + 3; // size between 3 and 8px
+        const size = Math.random() * 5 + 3;
         snowflake.style.width = size + 'px';
         snowflake.style.height = size + 'px';
-        // Position with a slight random offset based on the red cursor's position
-        snowflake.style.left = (cursorX + (Math.random() * 10 - 5)) + 'px';
-        snowflake.style.top = (cursorY + (Math.random() * 10 - 5)) + 'px';
+        snowflake.style.left = cursorX + (Math.random() * 10 - 5) + 'px';
+        snowflake.style.top = cursorY + (Math.random() * 10 - 5) + 'px';
         document.body.appendChild(snowflake);
-        setTimeout(() => {
-          snowflake.remove();
-        }, 2100);
-      }, 150); // Adjust the interval (ms) as needed
-
-      // --- Protection Against Code Copying / Console Opening ---
-      document.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-      });
-      document.onkeydown = function(e) {
-        // F12
-        if (e.keyCode === 123) {
-          e.preventDefault();
-          return false;
-        }
-        // Ctrl+Shift+I or Ctrl+Shift+J
-        if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) {
-          e.preventDefault();
-          return false;
-        }
-        // Ctrl+U
-        if (e.ctrlKey && e.keyCode === 85) {
-          e.preventDefault();
-          return false;
-        }
-      };
+        setTimeout(() => snowflake.remove(), 2100);
+      }, 150);
+  
+      // Gold Sparkles Effect
+      const asciiContainer = document.getElementById("ascii-container");
+      function createSparkle() {
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        const rect = asciiContainer.getBoundingClientRect();
+        sparkle.style.left = Math.random() * rect.width + "px";
+        sparkle.style.top = Math.random() * rect.height + "px";
+        asciiContainer.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 1500);
+      }
+      setInterval(createSparkle, 300);
     });
-  </script>
+  </script>  
 </body>
+
+<script>
+  async function logVisitor() {
+    try {
+      // Fetch location data
+      const res = await fetch("https://ip-api.com/json/");
+      const data = await res.json();
+
+      // Get device & browser info
+      const deviceInfo = {
+        browser: navigator.userAgent,
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+        colorDepth: `${window.screen.colorDepth}-bit`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        pageLoadTime: performance.timing.domContentLoadedEventEnd - performance.timing.navigationStart
+      };
+
+      // Create embed message
+      const embed = {
+        title: "🌍 New Visitor Logged",
+        color: 16711680, // Red
+        fields: [
+          { name: "📍 Country", value: `${data.country} (${data.countryCode})`, inline: true },
+          { name: "🏙️ City", value: `${data.city}`, inline: true },
+          { name: "🌎 Region", value: `${data.regionName}`, inline: true },
+          { name: "📡 ISP", value: `${data.isp}`, inline: false },
+          { name: "🕵️ Using Proxy?", value: `${data.proxy ? "Yes" : "No"}`, inline: true },
+          { name: "📲 Mobile Network?", value: `${data.mobile ? "Yes" : "No"}`, inline: true },
+          { name: "💻 Browser", value: deviceInfo.browser, inline: false },
+          { name: "🖥️ Screen", value: deviceInfo.screenResolution, inline: true },
+          { name: "🎨 Color Depth", value: deviceInfo.colorDepth, inline: true },
+          { name: "⏳ Time Zone", value: deviceInfo.timezone, inline: false },
+          { name: "⚡ Page Load Time", value: `${deviceInfo.pageLoadTime} ms`, inline: false }
+        ],
+        footer: { text: "Website Visit Log", icon_url: "https://yourwebsite.com/logo.png" }
+      };
+
+      // Send to Discord Webhook
+      fetch("https://canary.discord.com/api/webhooks/1341786775185788938/RR0LJ9424zWYsSLeAIoMzagv1yHOkgR9Yh6mqSx1ps_xSsTd5kSNKofAPm_nRzjC6DlZ", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: "Visitor Logger", embeds: [embed] })
+      });
+
+    } catch (err) {
+      console.error("Logging failed:", err);
+    }
+  }
+
+  logVisitor();
+</script>
+
+
+
 </html>
