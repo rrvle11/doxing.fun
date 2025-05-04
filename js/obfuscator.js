@@ -1,0 +1,42 @@
+const JavaScriptObfuscator = require('javascript-obfuscator');
+
+const obfuscatorConfig = {
+    compact: true,
+    controlFlowFlattening: true,
+    controlFlowFlatteningThreshold: 1,
+    deadCodeInjection: true,
+    deadCodeInjectionThreshold: 0.8,
+    debugProtection: true,
+    debugProtectionInterval: 1000,
+    disableConsoleOutput: true,
+    domainLock: ['localhost'],
+    identifierNamesGenerator: 'mangled',
+    identifiersPrefix: '_0x',
+    inputFileName: 'script',
+    log: false,
+    numbersToExpressions: true,
+    optionsPreset: 'high-obfuscation',
+    renameGlobals: true,
+    renameProperties: true,
+    reservedNames: [],
+    reservedStrings: [],
+    rotateStringArray: true,
+    seed: Math.random() * 1000000,
+    selfDefending: true,
+    shuffleStringArray: true,
+    simplify: true,
+    splitStrings: true,
+    splitStringsChunkLength: 5,
+    stringArray: true,
+    stringArrayCallsTransform: true,
+    stringArrayEncoding: ['rc4'],
+    stringArrayIndexShift: true,
+    stringArrayRotate: true,
+    stringArrayShuffle: true,
+    stringArrayThreshold: 1,
+    target: 'browser',
+    transformObjectKeys: true,
+    unicodeEscapeSequence: true
+};
+
+module.exports = obfuscatorConfig;
