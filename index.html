@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>khatir</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Add this in the <head> section of your HTML -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+    <!-- Then in your body where you want the CAPTCHA to appear, add this before your content -->
+    <div class="captcha-container">
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAABdrwaLA4F_fo6jm" data-callback="captchaCallback"></div>
+    </div>
+</head>
+<body>
+    <audio id="bgMusic" loop preload="auto">
+        <source src="russ.mp3" type="audio/mpeg">
+    </audio>
+    
+    <div class="container">
+        <div class="background-pattern"></div>
+        <div class="split-layout">
+            <div class="anime-character left"></div>
+            
+            <div class="center-content">
+                <div class="data-visualization">
+                    <canvas id="dataChart"></canvas>
+                </div>
+                <!-- The screensaver and pastes container will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="anime-character right"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

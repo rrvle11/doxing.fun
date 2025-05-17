@@ -1,0 +1,11 @@
+# How to Ensure Your Paste Stays Private
+
+1. Always use encryption for sensitive content
+2. Set proper visibility settings (Private/Password Protected)
+3. Use temporary links when sharing
+4. Enable self-destruct after reading
+5. Regularly check your paste history
+6. Use a VPN when uploading sensitive information
+7. Never include personal identifiable information
+
+Remember: Once something is online, it can potentially be saved forever.

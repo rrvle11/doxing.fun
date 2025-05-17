@@ -1,0 +1,521 @@
+:root {
+    --main-bg-color: #000000;
+    --text-color: #ffffff;
+    --accent-color: rgba(255, 255, 255, 0.8);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-bg-color);
+    color: var(--text-color);
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+}
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+.background-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://i.imgur.com/placeholder.png');
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.split-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    padding: 0 2rem;
+}
+
+.anime-character {
+    width: 300px;
+    height: 400px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: grayscale(100%);
+}
+
+.center-content {
+    flex: 1;
+    max-width: 800px;
+    margin: 60px auto 20px; /* Add top margin to push content away from system bar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.data-visualization, .screensaver, .pastes-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px; /* Consistent margins between elements */
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1); /* Add subtle white glow */
+}
+
+/* Make sure the system bar doesn't overlap content */
+.system-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Paste item styling for clickable behavior */
+/* Remove duplicate paste-item styles and keep only one version */
+.paste-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    background: transparent;
+}
+
+.paste-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Remove duplicate system-bar definition */
+.paste-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Clean up duplicate overlay definition and fix popup styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: none;
+}
+
+.blur-background .overlay {
+    opacity: 1;
+}
+
+.paste-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    max-height: 80vh;
+    z-index: 2000;
+    overflow-y: auto;
+    font-family: monospace;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.popup-active {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+}
+
+/* Clean up duplicate paste-item styles */
+.paste-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 10px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all 0.2s ease;
+    background: transparent;
+}
+
+.paste-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-left-color: rgba(255, 255, 255, 0.3);
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1999;
+    display: none;
+}
+
+.blur-background .overlay {
+    opacity: 1;
+}
+
+.paste-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.paste-popup-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 14px;
+}
+
+.paste-popup-close {
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+
+.paste-popup-close:hover {
+    color: #fff;
+}
+
+.paste-popup-content {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.paste-popup-meta {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.system-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.9);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.metrics-container {
+    display: flex;
+    gap: 20px;
+}
+
+.metric {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.progress-bar {
+    width: 100px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transition: width 0.3s ease;
+}
+
+.data-visualization {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    height: 200px;
+    border-radius: 4px;
+}
+
+.pastes-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    width: 100%;
+    margin-top: 0;
+    border-radius: 4px;
+}
+
+.paste-header {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: monospace;
+}
+
+.paste-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.paste-item {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 8px;
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.paste-title {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 11px;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.paste-info {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    font-family: monospace;
+}
+
+.matrix-text {
+    height: 300px;
+    background: rgba(0, 0, 0, 0.8);
+    font-family: monospace;
+    color: rgba(255, 255, 255, 0.7);
+    overflow: hidden;
+    padding: 1rem;
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-right: 20px;
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+.track-name, .track-time, .volume-icon {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+.volume-icon {
+    cursor: pointer;
+    transition: color 0.3s ease;
+    user-select: none;
+}
+
+.volume-icon:hover {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.volume-slider {
+    width: 80px;
+    height: 3px;
+    -webkit-appearance: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 3px;
+    height: 10px;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.volume-slider:hover::-webkit-slider-thumb {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+/* Fix the screensaver section */
+.screensaver {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    height: 200px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.screensaver canvas {
+    width: 100%;
+    height: 100%;
+    filter: blur(1px);
+}
+
+.screensaver::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+/* Replace all paste-related styles with these */
+.pastes-container {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.paste-header {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 12px;
+    font-family: monospace;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.paste-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.paste-item {
+    display: flex;
+    flex-direction: column;
+    padding: 5px 0;
+}
+
+.paste-title {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 11px;
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.paste-info {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 10px;
+    font-family: monospace;
+    margin-top: 2px;
+}
+
+/* Add glowing effect for blood [Kitty] author */
+/* Keep the existing blood-kitty-author style */
+.blood-kitty-author {
+    color: #ff3333;
+    font-weight: bold;
+    animation: blood-kitty-breathing 3s ease-in-out infinite;
+}
+
+@keyframes blood-kitty-breathing {
+    0% {
+        text-shadow: 0 0 5px #ff3333, 0 0 10px #ff3333;
+    }
+    50% {
+        text-shadow: 0 0 10px #ff3333, 0 0 20px #ff3333, 0 0 30px #ffcc00;
+    }
+    100% {
+        text-shadow: 0 0 5px #ff3333, 0 0 10px #ff3333;
+    }
+}
+
+/* Add styles for money [Admin] with yellow glow */
+.money-admin-author {
+    color: #ffcc00;
+    font-weight: bold;
+    animation: money-admin-breathing 3s ease-in-out infinite;
+}
+
+@keyframes money-admin-breathing {
+    0% {
+        text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00;
+    }
+    50% {
+        text-shadow: 0 0 10px #ffcc00, 0 0 20px #ffcc00, 0 0 30px #ffffff;
+    }
+    100% {
+        text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00;
+    }
+}
+
+/* Add styles for peer [Founder] with purple glow */
+.peer-founder-author {
+    color: #9933ff;
+    font-weight: bold;
+    animation: peer-founder-breathing 3s ease-in-out infinite;
+}
+
+@keyframes peer-founder-breathing {
+    0% {
+        text-shadow: 0 0 5px #9933ff, 0 0 10px #9933ff;
+    }
+    50% {
+        text-shadow: 0 0 10px #9933ff, 0 0 20px #9933ff, 0 0 30px #ff33cc;
+    }
+    100% {
+        text-shadow: 0 0 5px #9933ff, 0 0 10px #9933ff;
+    }
+}
+.captcha-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+}
+
+.content-container {
+  display: none; /* Initially hidden until CAPTCHA is verified */
+}

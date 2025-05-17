@@ -1,0 +1,16 @@
+# Transparency Report - July 2024
+
+Total pastes: 1,842,567
+Removed pastes: 12,345
+
+Removal reasons:
+- Copyright violations: 45%
+- Illegal content: 30%
+- Doxxing/Privacy violations: 15%
+- Malware/phishing links: 10%
+
+Government requests: 37
+Requests complied with: 22
+
+Average response time: 24 hours
+Uptime: 99.97%
