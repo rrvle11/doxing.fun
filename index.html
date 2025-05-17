@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Swatted.it | run u</title>
+    <title>khatir</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Add this in the <head> section of your HTML -->
@@ -19,19 +19,21 @@
         <source src="russ.mp3" type="audio/mpeg">
     </audio>
     
-    <div class="container">
-        <div class="background-pattern"></div>
-        <div class="split-layout">
-            <div class="anime-character left"></div>
-            
-            <div class="center-content">
-                <div class="data-visualization">
-                    <canvas id="dataChart"></canvas>
+    <!-- Wrap the main content in a container -->
+    <div class="content-container" style="display: none;">
+        <div class="container">
+            <div class="background-pattern"></div>
+            <div class="split-layout">
+                <div class="anime-character left"></div>
+                
+                <div class="center-content">
+                    <div class="data-visualization">
+                        <canvas id="dataChart"></canvas>
+                    </div>
                 </div>
-                <!-- The screensaver and pastes container will be inserted here by JavaScript -->
+                
+                <div class="anime-character right"></div>
             </div>
-            
-            <div class="anime-character right"></div>
         </div>
     </div>
     <script src="script.js"></script>
