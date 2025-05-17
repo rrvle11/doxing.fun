@@ -551,29 +551,31 @@ function setupPastePopups() {
 }
 
 // Fix the initialization section at the end of the file
-// Add this at the beginning of your script.js file
+// Add this at the beginning of your script
 let captchaVerified = false;
 
 // Add this function to handle the CAPTCHA callback
 function captchaCallback(token) {
-  captchaVerified = true;
-  document.querySelector('.captcha-container').style.display = 'none';
-  document.querySelector('.content-container').style.display = 'block';
+    captchaVerified = true;
+    document.querySelector('.captcha-container').style.display = 'none';
+    document.querySelector('.content-container').style.display = 'block';
+    
+    // Initialize components after CAPTCHA verification
+    initializeComponents();
+}
+
+// Move initialization code to a separate function
+function initializeComponents() {
+    createSystemBar();
+    initAudio();
+    createChart();
+    createScreensaver();
+    createPastesContainer();
+    setupPastePopups();
+    createMaze();
 }
 
 // Modify your DOMContentLoaded event handler
 document.addEventListener('DOMContentLoaded', () => {
-  // Hide the main content until CAPTCHA is verified
-  document.querySelector('.content-container').style.display = 'none';
-  
-  // Create system bar first
-  createSystemBar();
-  
-  // Then initialize other components
-  initAudio();
-  createChart();
-  createScreensaver();
-  createPastesContainer();
-  setupPastePopups();
-  createMaze();
+    // Components will be initialized after CAPTCHA verification
 });
