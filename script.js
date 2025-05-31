@@ -437,9 +437,9 @@ function setupPastePopups() {
     
     // Paste metadata - content will be loaded from files
     const pasteMetadata = {
-        "Bubby | WTS Samet | Samet Sahin": {
+        "Daiho Full dox | Downfall": {
             file: "paste1.txt",
-            author: "blood [Kitty]",
+            author: "Robio [Kitty]",
             date: "Feb 17, 2025"
         },
         "Kaan Kamikā | Blacklist | sensit...": {
@@ -500,10 +500,10 @@ function setupPastePopups() {
                 authorElement.textContent = metadata.author;
                 
                 // Remove any existing author classes
-                authorElement.classList.remove('blood-kitty-author', 'money-admin-author', 'peer-founder-author');
+                authorElement.classList.remove('Robio-kitty-author', 'money-admin-author', 'peer-founder-author');
                 
                 // Add appropriate class based on author
-                if (metadata.author === "blood [Kitty]") {
+                if (metadata.author === "Robio [Kitty]") {
                     authorElement.classList.add('blood-kitty-author');
                 } else if (metadata.author === "money [Admin]") {
                     authorElement.classList.add('money-admin-author');
