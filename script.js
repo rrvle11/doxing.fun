@@ -389,8 +389,8 @@ function createPastesContainer() {
         <div class="paste-header">RECENT PASTES</div>
         <div class="paste-list">
             <div class="paste-item">
-                <span class="paste-title">Bubby | WTS Samet | Samet Sahin</span>
-                <span class="paste-info">9836 views • Feb 17, 2025</span>
+                <span class="paste-title">Daiho Full dox | Downfall</span>
+                <span class="paste-info">5928 views • Feb 17, 2025</span>
             </div>
             <div class="paste-item">
                 <span class="paste-title">Kaan Kamikā | Blacklist | sensit...</span>
